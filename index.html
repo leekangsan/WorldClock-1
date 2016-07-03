@@ -5,12 +5,98 @@
     <title>World Clock</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css"/>
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css"/>
+
+    <!-- Mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<p>Hello World</p>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">World Clock</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/Drapegnik/Drapegnik.github.io">Source</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="col-md-4">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">New Timezone</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="inputGMT" class="col-lg-3 control-label">GMT:</label>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" id="inputGMT" placeholder="example: -3">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputName" class="col-lg-3 control-label">City Name:</label>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" id="inputName" placeholder="example: Moscow">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-7 col-lg-offset-3">
+                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-5">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Timezones:</h3>
+        </div>
+        <h4 class="col-md-2 col-md-offset-1 control-label">Search</h4>
+        <div class="form-group">
+            <div class="input-group col-md-8">
+                <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
+                <input ng-model="query" class="form-control" placeholder="example: Moscow, +3">
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-dismissible alert-info">
+                <span class="close">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </span>
+                <span class="close">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </span>
+                <div>GMT: <span class="badge">+3</span></div>
+                <div>Timezone name: <span class="badge">Moscow</span></div>
+                <div>Current Local Time: <span class="badge">20:50:78</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <!-- jQuery -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
