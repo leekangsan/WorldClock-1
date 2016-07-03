@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css"/>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css"/>
@@ -16,7 +16,7 @@
     <!-- Mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<body ng-controller="timeController" ng-init="initClocks()">
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -49,19 +49,21 @@
                     <div class="form-group">
                         <label for="inputGMT" class="col-lg-3 control-label">GMT:</label>
                         <div class="col-lg-7">
-                            <input type="text" class="form-control" id="inputGMT" placeholder="example: -3">
+                            <input ng-model="gmt" type="text" class="form-control" id="inputGMT"
+                                   placeholder="example: -3">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputName" class="col-lg-3 control-label">City Name:</label>
                         <div class="col-lg-7">
-                            <input type="text" class="form-control" id="inputName" placeholder="example: Moscow">
+                            <input ng-model="name" type="text" class="form-control" id="inputName"
+                                   placeholder="example: Moscow" ng-change="inputChange('#inputName')">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-7 col-lg-offset-3">
-                            <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <a ng-click="cancelTZ()" class="btn btn-default">Cancel</a>
+                            <a ng-disabled="isError" ng-click="addTZ('#inputGMT')" class="btn btn-primary">Add</a>
                         </div>
                     </div>
                 </fieldset>
@@ -81,7 +83,7 @@
                 <input ng-model="query" class="form-control" placeholder="example: Moscow, +3">
             </div>
         </div>
-        <div class="panel-body">
+        <div ng-repeat="zone in zones | filter:query" class="panel-body">
             <div class="alert alert-dismissible alert-info">
                 <span class="close">
                     <i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -89,9 +91,9 @@
                 <span class="close">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </span>
-                <div>GMT: <span class="badge">+3</span></div>
-                <div>Timezone name: <span class="badge">Moscow</span></div>
-                <div>Current Local Time: <span class="badge">20:50:78</span></div>
+                <div>GMT:<span class="badge"><span ng-show="zone.gmt > 0">+</span>{{ zone.gmt }}</span></div>
+                <div>Timezone name: <span class="badge">{{ zone.name }}</span></div>
+                <div>Current Local Time: <span class="badge">{{ getLocTime(zone.gmt) | date:'HH:mm:ss'}} </span></div>
             </div>
         </div>
     </div>
